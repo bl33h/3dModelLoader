@@ -36,3 +36,11 @@ void linesDrawing(const glm::vec3& start, const glm::vec3& end)
     SDL_RenderDrawLine(renderer, static_cast<int>(start.x), static_cast<int>(start.y),
     static_cast<int>(end.x), static_cast<int>(end.y));
 }
+
+// Function to draw triangles using lines between three vertices
+void trianglesDrawing(const glm::vec3& v1, const glm::vec3& v2, const glm::vec3& v3) 
+{
+    linesDrawing(v1, v2);
+    linesDrawing(v2, v3);
+    linesDrawing(v3, v1);
+}
