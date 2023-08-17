@@ -146,3 +146,38 @@ std::vector<glm::vec3> setupVertexArray(const std::vector<glm::vec3>& vertex, co
 
     return vertexArray;
 }
+
+int main() {
+    // Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) 
+    {
+        std::cout << "Error: SDL_Init failed." << std::endl;
+        return 1;
+    }
+
+    // Create SDL window
+    SDL_Window* window = SDL_CreateWindow("3dModelLoader", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+    if (!window) 
+    {
+        std::cout << "Error: Could not create SDL window." << std::endl;
+        SDL_Quit();
+        return 1;
+    }
+
+    // Create SDL renderer
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (!renderer) 
+    {
+        std::cout << "Error: Could not create SDL renderer." << std::endl;
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Clean up and exit
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
