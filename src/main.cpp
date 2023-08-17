@@ -34,7 +34,7 @@ Color currentColor(255, 255, 255, 255);
 void linesDrawing(const glm::vec3& start, const glm::vec3& end) 
 {
     SDL_RenderDrawLine(renderer, static_cast<int>(start.x), static_cast<int>(start.y),
-                       static_cast<int>(end.x), static_cast<int>(end.y));
+    static_cast<int>(end.x), static_cast<int>(end.y));
 }
 
 // Function to draw triangles using lines between three vertices
