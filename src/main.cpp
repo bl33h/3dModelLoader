@@ -44,3 +44,26 @@ void trianglesDrawing(const glm::vec3& v1, const glm::vec3& v2, const glm::vec3&
     linesDrawing(v2, v3);
     linesDrawing(v3, v1);
 }
+
+// Function to draw the model using lines, vertices, and triangles
+void drawModel(const std::vector<glm::vec3>& vertex) 
+{   
+    // Clear the renderer with the background color
+    SDL_SetRenderDrawColor(renderer, clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    SDL_RenderClear(renderer);
+
+    // Set the renderer color for drawing lines
+    SDL_SetRenderDrawColor(renderer, currentColor.r, currentColor.g, currentColor.b, currentColor.a);
+
+    // Iterate through vertices and draw triangles using lines
+    for (size_t i = 0; i < vertex.size(); i += 3) {
+        if (i + 2 < vertex.size()) {
+            glm::vec3 v1 = vertex[i];
+            glm::vec3 v2 = vertex[i + 1];
+            glm::vec3 v3 = vertex[i + 2];
+            int offsetX = windowWidth / 2;
+            int offsetY = windowHeight / 1.5;
+            trianglesDrawing(v1 + glm::vec3(offsetX, offsetY, 0), v2 + glm::vec3(offsetX, offsetY, 0), v3 + glm::vec3(offsetX, offsetY, 0));
+        }
+    }
+}
