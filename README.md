@@ -21,8 +21,8 @@ The code represents a program for loading and rendering a 3D model using SDL (Si
 - clean.sh: A shell script to clean up build artifacts and generated files.
 - src: A directory containing the source code files for the graphics application.
   - colors.h: Header file that defines the Color struct and functions for manipulating colors in the application.
-  - triangles.h:
-  - faces.h:
+  - triangles.h: Header file that enables drawing triangles using SDL_Renderer with 3D vertices and colors from colors.h.
+  - faces.h: Header file that defines the 'Face' struct containing a trio of integer vertex indices.
   - main.cpp: The main C++ source file that implements the graphics application.
 - CMakeLists.txt: The CMake configuration file that manages the build process.
 
