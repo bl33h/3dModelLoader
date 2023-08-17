@@ -67,3 +67,53 @@ void drawModel(const std::vector<glm::vec3>& vertex)
         }
     }
 }
+
+// Function to load a 3D object from an OBJ file
+bool load3Dobject(const std::string& path, std::vector<glm::vec3>& outputVertex, std::vector<Face>& out_faces) 
+{   
+    // Open the OBJ file
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::cout << "Error: Couldn't open file " << path << std::endl;
+        return false;
+    }
+
+    // Temporary storage for vertices and faces
+    std::vector<glm::vec3> temporaryVertex;
+    std::vector<std::array<int, 3>> temp_faces;
+
+    // Read through the file line by line
+    std::string line;
+    while (std::getline(file, line)) 
+    {
+        std::istringstream iss(line);
+        std::string type;
+        iss >> type;
+
+        // Parse vertex data
+        if (type == "v") {
+            glm::vec3 vertex;
+            iss >> vertex.x >> vertex.y >> vertex.z;
+            temporaryVertex.push_back(vertex);
+        
+        // Parse face data
+        } else if (type == "f") {
+            std::array<int, 3> faceID{};
+            for (int i = 0; i < 3; i++) {
+                std::string faceIndexStr;
+                iss >> faceIndexStr;
+                faceID[i] = std::stoi(faceIndexStr) - 1;
+            }
+            temp_faces.push_back(faceID);
+        }
+    }
+
+    // Store the parsed data into output vectors
+    outputVertex = temporaryVertex;
+    out_faces.reserve(temp_faces.size());
+    for (const auto& face : temp_faces) {
+        out_faces.push_back({ face });
+    }
+
+    return true;
+}
