@@ -29,3 +29,10 @@ SDL_Renderer* renderer = nullptr;
 // Background and drawing colors
 Color clearColor(111, 99, 143, 0);
 Color currentColor(255, 255, 255, 255);
+
+// Function to draw lines between two points
+void linesDrawing(const glm::vec3& start, const glm::vec3& end) 
+{
+    SDL_RenderDrawLine(renderer, static_cast<int>(start.x), static_cast<int>(start.y),
+    static_cast<int>(end.x), static_cast<int>(end.y));
+}
