@@ -29,7 +29,12 @@ The code represents a program for loading and rendering a 3D model using SDL (Si
 ## Features
 The main features of the graphics application include:
 
-- 
+- 3D Model Loading and Rendering: The program can load 3D models in OBJ format and render them on the screen using SDL and OpenGL.
+- Model Rotation: The application can apply horizontal and vertical rotation transformations to the loaded 3D model, allowing users to visualize the model from different angles.
+- Interactive Display: The program provides an interactive display where users can view the loaded 3D model, rotate it using real-time transformations, and observe the changes in its orientation.
+- Wireframe Rendering: The application renders the 3D model as wireframes, showing the edges and faces of the model using lines.
+- Graphical User Interface: The program features a graphical user interface that utilizes SDL to create a window for rendering the 3D model, enabling easy interaction and visualization.
+- User-Friendly Controls: Users can conveniently control the rotation of the model using the interface, allowing them to explore various viewpoints
 
 ## How To Use
 To clone and run this application, you'll need [wsl](https://learn.microsoft.com/en-us/windows/wsl/install) and the following tools installed on it: [Git](https://git-scm.com), [C++ compiler](https://www.fdi.ucm.es/profesor/luis/fp/devtools/mingw.html), [CMake](https://cmake.org/download/), [Make](https://linuxhint.com/install-make-ubuntu/), [glm](https://sourceforge.net/projects/glm.mirror/), and [SDL2](https://www.oreilly.com/library/view/rust-programming-by/9781788390637/386c15eb-41b2-41b4-bd65-154a750a58d8.xhtml). From your command line:
