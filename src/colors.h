@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------
+ /*---------------------------------------------------------------------------
 Copyright (C), 2022-2023, Sara Echeverria (bl33h)
 @author Sara Echeverria
 FileName: colors.h
@@ -22,11 +22,15 @@ struct Color {
     unsigned char r;
     unsigned char g;
     unsigned char b;
+    unsigned char a;
 
-    Color(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0)
+    Color(unsigned char red = 0, unsigned char green = 0, unsigned char blue = 0, unsigned char alpha = 255)
         : r(clamp(red, static_cast<unsigned char>(0), static_cast<unsigned char>(255))),
           g(clamp(green, static_cast<unsigned char>(0), static_cast<unsigned char>(255))),
-          b(clamp(blue, static_cast<unsigned char>(0), static_cast<unsigned char>(255))) {}
+          b(clamp(blue, static_cast<unsigned char>(0), static_cast<unsigned char>(255))),
+          a(clamp(alpha, static_cast<unsigned char>(0), static_cast<unsigned char>(255))) {}
+
+    
 
     Color operator+(const Color& other) const {
         return Color(
@@ -45,9 +49,10 @@ struct Color {
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Color& color) {
-        os << "RGB(" << static_cast<int>(color.r) << ", "
+        os << "RGBA(" << static_cast<int>(color.r) << ", "
            << static_cast<int>(color.g) << ", "
-           << static_cast<int>(color.b) << ")";
+           << static_cast<int>(color.b) << ", "
+           << static_cast<int>(color.a) << ")";
         return os;
     }
 
