@@ -1,5 +1,5 @@
 # 3dModelLoader
-Code represents a program for loading and rendering a 3D model using SDL (Simple DirectMedia Layer) and OpenGL. The program is designed to read a 3D model in OBJ format, apply rotation transformations to it, and display the rotated model on the screen. 
+Code that represents a program for loading and rendering a 3D model using SDL (Simple DirectMedia Layer) and OpenGL. The program is designed to read a 3D model in OBJ format, apply rotation transformations to it, and display the rotated model on the screen. 
 
 <p align="center">
   <br>
