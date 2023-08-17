@@ -34,7 +34,7 @@ Color currentColor(255, 255, 255, 255);
 void linesDrawing(const glm::vec3& start, const glm::vec3& end) 
 {
     SDL_RenderDrawLine(renderer, static_cast<int>(start.x), static_cast<int>(start.y),
-    static_cast<int>(end.x), static_cast<int>(end.y));
+                       static_cast<int>(end.x), static_cast<int>(end.y));
 }
 
 // Function to draw triangles using lines between three vertices
@@ -172,6 +172,82 @@ int main() {
         SDL_DestroyWindow(window);
         SDL_Quit();
         return 1;
+    }
+
+    // Load 3D model from OBJ file (here you can change the path in case you did not place the file in the objects folder)
+    std::string filePath = "src/objects/spaceship.obj";
+    std::cout << "Loading OBJ file: " << filePath << std::endl;
+
+    // Initialize vectors to store vertex and face data
+    std::vector<glm::vec3> vertex;
+    std::vector<Face> faces;
+
+    // Load the 3D model from the OBJ file
+    if (!load3Dobject(filePath, vertex, faces)) 
+    {
+        std::cout << "Error: Could not load OBJ file." << std::endl;
+        SDL_DestroyRenderer(renderer);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Set up the vertex array for rendering
+    std::vector<glm::vec3> vertexArray = setupVertexArray(vertex, faces);
+
+    // Clear the renderer and set drawing color
+    SDL_SetRenderDrawColor(renderer, clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    SDL_RenderClear(renderer);
+
+    // Draw the initial model
+    SDL_SetRenderDrawColor(renderer, currentColor.r, currentColor.g, currentColor.b, currentColor.a);
+    drawModel(vertexArray);
+    SDL_RenderPresent(renderer);
+
+    // Main loop for rendering and interaction
+    bool running = true;
+    SDL_Event event;
+    float angle = 0.0f;
+
+    while (running) {
+
+        // Check for events
+        while (SDL_PollEvent(&event)) 
+        {
+            // Exit the loop if the window is closed
+            if (event.type == SDL_QUIT) 
+            {
+                running = false;
+            }
+        }
+
+        // Clear the renderer
+        SDL_SetRenderDrawColor(renderer, clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+        SDL_RenderClear(renderer);
+
+        // Update rotation angle
+        angle += 0.01f;
+
+        // Create a rotation matrix around the Y-axis
+        glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f));
+
+        // Create a rotation matrix around the X-axis (vertical rotation)
+        glm::mat4 rotationMatrixVertical = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(1.0f, 0.0f, 0.0f));
+
+        // Combine the rotation matrices for horizontal and vertical rotations
+        glm::mat4 combinedRotationMatrix = rotationMatrixVertical * rotationMatrix;
+
+        // Apply combined rotation to each vertex in the vertex array
+        std::vector<glm::vec3> rotatedVertexArray;
+        for (const auto& vertex : vertexArray) 
+        {
+            glm::vec4 rotatedVertex = combinedRotationMatrix * glm::vec4(vertex, 1.0f);
+            rotatedVertexArray.push_back(glm::vec3(rotatedVertex));
+        }
+
+        // Draw the rotated model
+        drawModel(rotatedVertexArray);
+        SDL_RenderPresent(renderer);
     }
 
     // Clean up and exit
