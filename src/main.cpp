@@ -117,3 +117,32 @@ bool load3Dobject(const std::string& path, std::vector<glm::vec3>& outputVertex,
 
     return true;
 }
+
+// Function to set up the vertex array for rendering
+std::vector<glm::vec3> setupVertexArray(const std::vector<glm::vec3>& vertex, const std::vector<Face>& faces)
+{    
+    // Scale factor for vertices
+    float scale = 40.0f;
+
+    // Initialize vertex array
+    std::vector<glm::vec3> vertexArray;
+
+    // Process object's faces
+    for (const auto& face : faces)
+    {   
+        // Get vertex positions and scale
+        glm::vec3 vertexPosition1 = vertex[face.vertexIndices[0]];
+        glm::vec3 vertexPosition2 = vertex[face.vertexIndices[1]];
+        glm::vec3 vertexPosition3 = vertex[face.vertexIndices[2]];
+        glm::vec3 vertexScaled1 = glm::vec3(vertexPosition1.x * scale, -vertexPosition1.y * scale, vertexPosition1.z * scale);
+        glm::vec3 vertexScaled2 = glm::vec3(vertexPosition2.x * scale, -vertexPosition2.y * scale, vertexPosition2.z * scale);
+        glm::vec3 vertexScaled3 = glm::vec3(vertexPosition3.x * scale, -vertexPosition3.y * scale, vertexPosition3.z * scale);
+
+        // Add scaled vertices to the vertex array
+        vertexArray.push_back(vertexScaled1);
+        vertexArray.push_back(vertexScaled2);
+        vertexArray.push_back(vertexScaled3);
+    }
+
+    return vertexArray;
+}
