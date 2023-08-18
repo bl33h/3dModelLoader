@@ -3,7 +3,7 @@ The code represents a program for loading and rendering a 3D model using SDL (Si
 
 <p align="center">
   <br>
-  <img src="" alt="pic" width="500">
+  <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExb28wZGVqbDlsYjZtOTN0OHBuNnN1NnZ5aDFkN3hiYm00aXhoNXUyMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/H1MfAckgQYxGrbfuZx/giphy.gif" alt="pic" width="500">
   <br>
 </p>
 
